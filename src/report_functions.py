@@ -100,7 +100,23 @@ def join_data(primary_list, secondary_list, primary_key, foreign_key):
     # Hint: Create a dictionary mapping secondary_list IDs to records
     # Hint: For each record in primary_list, look up the matching secondary record
     # Hint: Use dict.update() to merge dictionaries
-    pass
+    # Step 1: Build lookup dictionary from secondary list
+    secondary_lookup = {}
+    for item in secondary_list:
+        secondary_lookup[item[foreign_key]] = item
+
+    # Step 2: Merge secondary data into each primary record
+    joined_list = []
+    for primary_item in primary_list:
+        combined = primary_item.copy()
+        match_id = primary_item.get(primary_key)
+
+        if match_id in secondary_lookup:
+            combined.update(secondary_lookup[match_id])
+
+        joined_list.append(combined)
+
+    return joined_list
 
 
 def write_report_to_file(filepath, content):
@@ -142,3 +158,10 @@ if __name__ == '__main__':
     print(f"Average flight hours for VFA-41: {avg_hours:.2f}")
     pilot = find_record_by_id(pilots, 'pilot_id', 'P001')
     print(f"Found pilot P001: {pilot['rank']} {pilot['last_name']} ({pilot['callsign']})")
+    # Load flight logs to test join
+    flights = read_csv_file('data/flight_logs.csv')
+    print(f"Loaded {len(flights)} flight records")
+
+    # Join flights with pilots using 'pilot_id'
+    enriched_flights = join_data(flights, pilots, 'pilot_id', 'pilot_id')
+    print(f"Sample enriched flight record: {enriched_flights[0]}")
