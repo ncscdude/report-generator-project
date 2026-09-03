@@ -1,0 +1,29 @@
+============================================================
+             SQUADRON OPERATIONS REPORT: VFA-41             
+============================================================
+
+Generated: Operational Flight Data System
+
+--- OPERATIONAL SUMMARY ---
+Total Missions Flown : 286
+Total Flight Hours   : 915.6 hrs
+Average Mission Time : 3.20 hrs
+
+--- MISSION BREAKDOWN ---
+  Combat            :   53 missions
+  Patrol            :   53 missions
+  Reconnaissance    :   66 missions
+  Training          :   54 missions
+  Transport         :   60 missions
+
+--- SQUADRON ROSTER (3 Pilots) ---
+  P001 | Capt Peter Mitchell      | Callsign: Maverick     | Hours: 2847
+  P002 | Lt Bradley Bradshaw      | Callsign: Rooster      | Hours: 891
+  P003 | Maj Sarah Blackwood      | Callsign: Phoenix      | Hours: 1456
+
+--- AIRCRAFT INVENTORY (3 Aircraft) ---
+  A001 | Tail: NE-400     | Status: Active       | Hours: 1247
+  A002 | Tail: NE-401     | Status: Active       | Hours: 1089
+  A003 | Tail: NE-402     | Status: Active       | Hours: 1356
+
+============================================================
