@@ -59,7 +59,11 @@ def calculate_total(data_list, field_name):
     # Hint: Initialize a total variable to 0
     # Hint: Loop through each record and add float(record[field_name]) to total
     # Hint: Remember to convert string values to float!
-    pass
+    total = 0.0
+    for record in data_list:
+        total += float(record[field_name])
+    return total
+
 
 
 def calculate_average(data_list, field_name):
@@ -67,7 +71,12 @@ def calculate_average(data_list, field_name):
     # TODO: Your code here
     # Hint: Use calculate_total() and count_records() functions
     # Hint: Average = total / count
-    pass
+    count = count_records(data_list)
+    if count == 0:
+        return 0.0
+    total = calculate_total(data_list, field_name)
+    return total / count
+
 
 
 def find_record_by_id(data_list, id_field, id_value):
@@ -75,7 +84,11 @@ def find_record_by_id(data_list, id_field, id_value):
     # TODO: Your code here
     # Hint: Loop through data_list
     # Hint: Return the record when record[id_field] == id_value
-    pass
+    for record in data_list:
+        if record[id_field] == id_value:
+            return record
+    return None  # Return None if not found
+
 
 
 def join_data(primary_list, secondary_list, primary_key, foreign_key):
@@ -121,3 +134,11 @@ if __name__ == '__main__':
     print(f"VFA-41 pilots found: {len(vfa_41_pilots)}")
     for p in vfa_41_pilots:
         print(f"  - {p['rank']} {p['last_name']} ({p['callsign']})")
+    total_hours = calculate_total(vfa_41_pilots, 'total_flight_hours')
+    print(f"Total flight hours for VFA-41: {total_hours}")
+    avg_hours = calculate_average(vfa_41_pilots, 'total_flight_hours')
+    print(f"Average flight hours for VFA-41: {avg_hours:.2f}")
+    avg_hours = calculate_average(vfa_41_pilots, 'total_flight_hours')
+    print(f"Average flight hours for VFA-41: {avg_hours:.2f}")
+    pilot = find_record_by_id(pilots, 'pilot_id', 'P001')
+    print(f"Found pilot P001: {pilot['rank']} {pilot['last_name']} ({pilot['callsign']})")
