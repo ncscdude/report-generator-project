@@ -123,7 +123,8 @@ def write_report_to_file(filepath, content):
     """Writes a text report to a file."""
     # TODO: Your code here
     # Hint: Use 'with open(filepath, 'w')' to open file for writing
-    pass
+    with open(filepath, 'w') as file:
+        file.write(content)
 
 
 def format_header(title):
@@ -131,7 +132,10 @@ def format_header(title):
     # TODO: Your code here
     # Hint: Use "=" * 60 to create a line of equals signs
     # Hint: Use .center(60) to center the title
-    pass
+    line = "=" * 60
+    centered_title = title.center(60)
+    return f"{line}\n{centered_title}\n{line}\n"
+
 
 
 # Testing functions
@@ -165,3 +169,10 @@ if __name__ == '__main__':
     # Join flights with pilots using 'pilot_id'
     enriched_flights = join_data(flights, pilots, 'pilot_id', 'pilot_id')
     print(f"Sample enriched flight record: {enriched_flights[0]}")
+    # Test format_header and write_report_to_file
+    header = format_header("TEST REPORT HEADER")
+    print(header)
+
+    sample_content = header + "This is a sample operational report.\n"
+    write_report_to_file('reports/test_report.txt', sample_content)
+    print("Report written to reports/test_report.txt successfully.")
