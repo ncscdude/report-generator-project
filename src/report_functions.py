@@ -16,14 +16,16 @@ def read_csv_file(filepath):
     # TODO: Your code here
     # Hint: Use csv.DictReader to read CSV files into dictionaries
     # Hint: Remember to use 'with open()' for proper file handling
-    pass
+    with open(filepath, 'r',) as file:
+        reader = csv.DictReader(file)
+        return list(reader)
 
 
 def count_records(data_list):
     """Counts the number of records in a dataset."""
     # TODO: Your code here
     # Hint: Use the len() function
-    pass
+    return len(data_list)
 
 
 def get_unique_values(data_list, field_name):
@@ -31,7 +33,11 @@ def get_unique_values(data_list, field_name):
     # TODO: Your code here
     # Hint: Use a set to collect unique values
     # Hint: Convert the set to a list and sort it before returning
-    pass
+    unique_values = set()
+    for record in data_list:
+        unique_values.add(record[field_name])
+    return sorted(list(unique_values))
+
 
 
 def filter_by_field(data_list, field_name, field_value):
@@ -39,7 +45,12 @@ def filter_by_field(data_list, field_name, field_value):
     # TODO: Your code here
     # Hint: Use a list comprehension to filter or a loop!
     # see here for more info: https://docs.python.org/3.13/tutorial/datastructures.html#list-comprehensions
-    pass
+    filtered_records = []
+    for record in data_list:
+        if record[field_name] == field_value:
+            filtered_records.append(record)
+    return [record for record in data_list if record[field_name] == field_value]
+
 
 
 def calculate_total(data_list, field_name):
@@ -97,8 +108,16 @@ def format_header(title):
 # Testing functions
 if __name__ == '__main__':
     print("Testing report functions...")
-    print("Implement functions above, then uncomment test code below")
-    
-    # # Test read_csv_file
-    # pilots = read_csv_file('../data/pilots.csv')
-    # print(f"Loaded {len(pilots)} pilots")
+
+    # Test read_csv_file
+    pilots = read_csv_file('data/pilots.csv')
+    print(f"Loaded {len(pilots)} pilots")
+    print(f"First pilot: {pilots[0]}")
+    count = count_records(pilots)
+    print(f"Count function returned: {count}")
+    squadrons = get_unique_values(pilots, 'squadron')
+    print(f"Unique squadrons: {squadrons}")
+    vfa_41_pilots = filter_by_field(pilots, 'squadron', 'VFA-41')
+    print(f"VFA-41 pilots found: {len(vfa_41_pilots)}")
+    for p in vfa_41_pilots:
+        print(f"  - {p['rank']} {p['last_name']} ({p['callsign']})")
